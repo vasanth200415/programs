@@ -1,0 +1,15 @@
+import heapq
+def find_klargest(lis,k):
+    lis=[-i for i in lis]
+    heapq.heapify(lis)
+    while k>0:
+        
+        w1=heapq.heappop(lis)
+        k=k-1
+        
+    return -w1
+
+lis=list(map(int,input("enter:").split()))
+k=int(input("k value:"))
+ans=find_klargest(lis,k)
+print("ans:",ans)
