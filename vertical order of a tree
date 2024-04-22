@@ -1,0 +1,51 @@
+from collections import defaultdict, deque
+
+
+# Define a simple tree node structure
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+# Function to perform vertical order traversal
+def vertical_order_traversal(root):
+    if not root:
+        return []
+
+    # This dictionary will hold nodes at each horizontal distance
+    vertical_order = defaultdict(list)
+
+    # The queue holds tuples of (node, horizontal distance)
+    queue = deque([(root, 0)])
+
+    while queue:
+        node, distance = queue.popleft()
+
+        # Add the node's value to the corresponding horizontal distance
+        vertical_order[distance].append(node.value)
+
+        # Add children to the queue with their corresponding horizontal distances
+        if node.left:
+            queue.append((node.left, distance - 1))
+        if node.right:
+            queue.append((node.right, distance + 1))
+
+    # Sort the dictionary keys (horizontal distances) to get the correct vertical order
+    sorted_distances = sorted(vertical_order.keys())
+
+    # Return the vertical order based on sorted horizontal distances
+    return [vertical_order[d] for d in sorted_distances]
+
+
+# Example usage
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.right.left = TreeNode(6)
+root.right.right = TreeNode(7)
+
+print(vertical_order_traversal(root))
