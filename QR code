@@ -1,0 +1,27 @@
+
+
+import qrcode
+import json
+from PIL import Image  # Import the Image class from Pillow
+
+# Define student details as a dictionary
+student_details = {
+    "roll_number": "21951A12B5",
+    "name": "VASANTH KUMAR",
+    "cgpa": "7.9",
+    "Branch":"IT"
+}
+
+# Convert the dictionary to a JSON string to encode into the QR code
+student_json = json.dumps(student_details)
+
+# Generate the QR code from the JSON string
+img = qrcode.make(student_json)
+
+# Save the QR code image to a file
+img.save("student_details_qr.png")
+
+# Display the QR code image
+img.show()
+
+print("QR Code has been generated, saved, and displayed.")
