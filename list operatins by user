@@ -1,0 +1,9 @@
+N = int(input())
+list = []
+for _ in range (N):
+    command = input().split()
+    if command[0] == "print":
+        print(list)
+    else:
+        result = f'list.{command[0]}({", ".join(command[1:])})'
+        eval(result
